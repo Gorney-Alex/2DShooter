@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     
     public Player Target => _target;
     
-    public event UnityAction OnDeath;
+    public event UnityAction Dying;
 
     public void TakeDamage(int damage)
     {

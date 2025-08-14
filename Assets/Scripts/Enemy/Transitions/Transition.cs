@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Transition : MonoBehaviour
+public abstract class Transition : MonoBehaviour
 {
     [SerializeField] private State _targetState;
 
@@ -17,8 +17,8 @@ public class Transition : MonoBehaviour
         Target = target;
     }
 
-    private void onEnable()
+    private void OnEnable()
     {
-        NeedTransit = true;
+        NeedTransit = false;
     }
 }

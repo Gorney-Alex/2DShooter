@@ -11,8 +11,6 @@ public class EnemyStateMachine : MonoBehaviour
     private Player _target;
     private State _currentState;
 
-    public State CurrentState => _currentState;
-
     private void Start()
     {
         _target = GetComponent<Enemy>().Target;

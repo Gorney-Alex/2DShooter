@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class CelebrationState : MonoBehaviour
+public class CelebrationState : State
 {
     private Animator _animator;
 
