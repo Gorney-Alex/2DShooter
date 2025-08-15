@@ -10,6 +10,7 @@ public class EnemyStateMachine : MonoBehaviour
     
     private Player _target;
     private State _currentState;
+    
 
     private void Start()
     {
