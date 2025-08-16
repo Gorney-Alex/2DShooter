@@ -28,6 +28,12 @@ public class Player : MonoBehaviour
         Money += reward;
     }
 
+    public void BuyWeapon(Weapon weapon)
+    {
+        Money -= weapon.Price;
+        _weapons.Add(weapon);
+    }
+
     public void ApplyDamage(int damage)
     {
         _currentHealth -= damage;
