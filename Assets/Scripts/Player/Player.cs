@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _shootPoint;
 
     private Weapon _currentWeapon;
+    private int _currentWeaponNumber = 0;
     private int _currentHealth;
     private Animator _animator;
 
@@ -24,6 +25,34 @@ public class Player : MonoBehaviour
     public event UnityAction<int, int> HealthChanged;
     public event UnityAction<int> MoneyChanged;
 
+    public void NextWeapon()
+    {
+        if (_currentWeaponNumber == _weapons.Count - 1)
+        {
+            _currentWeaponNumber = 0;
+        }
+        else
+        {
+            _currentWeaponNumber++;
+        }
+        
+        ChangeWeapon(_weapons[_currentWeaponNumber]);
+    }
+    
+    public void PreviousWeapon()
+    {
+        if (_currentWeaponNumber == 0)
+        {
+            _currentWeaponNumber = _weapons.Count - 1;
+        }
+        else
+        {
+            _currentWeaponNumber--;
+        }
+        
+        ChangeWeapon(_weapons[_currentWeaponNumber]);
+    }
+    
     public void OnEnemyDied(int reward)
     {
         Money += reward;
@@ -56,7 +85,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _currentHealth = _health;
-        _currentWeapon = _weapons[0];
+        ChangeWeapon(_weapons[_currentWeaponNumber]);
         _animator = GetComponent<Animator>();
     }
 
@@ -67,4 +96,6 @@ public class Player : MonoBehaviour
             _currentWeapon.Fire(_shootPoint);
         }
     }
+
+    private void ChangeWeapon(Weapon weapon) => _currentWeapon = weapon;
 }
