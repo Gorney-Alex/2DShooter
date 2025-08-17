@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     }
     
     public event UnityAction<int, int> HealthChanged;
+    public event UnityAction<int> MoneyChanged;
 
     public void OnEnemyDied(int reward)
     {
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
     {
         Money -= weapon.Price;
         _weapons.Add(weapon);
+        MoneyChanged?.Invoke(Money);
     }
 
     public void ApplyDamage(int damage)
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
     public void AddMoney(int amount)
     {
         Money += amount;
+        MoneyChanged?.Invoke(Money);
     }
 
     private void Awake()
