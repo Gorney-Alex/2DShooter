@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
@@ -12,7 +13,6 @@ public class Player : MonoBehaviour
     private Weapon _currentWeapon;
     private int _currentWeaponNumber = 0;
     private int _currentHealth;
-    private Animator _animator;
 
     private int _money;
 
@@ -24,6 +24,20 @@ public class Player : MonoBehaviour
     
     public event UnityAction<int, int> HealthChanged;
     public event UnityAction<int> MoneyChanged;
+    
+    private void Awake()
+    {
+        _currentHealth = _health;
+        ChangeWeapon(_weapons[_currentWeaponNumber]);
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            _currentWeapon.Fire(_shootPoint);
+        }
+    }
 
     public void NextWeapon()
     {
@@ -80,21 +94,6 @@ public class Player : MonoBehaviour
     {
         Money += amount;
         MoneyChanged?.Invoke(Money);
-    }
-
-    private void Awake()
-    {
-        _currentHealth = _health;
-        ChangeWeapon(_weapons[_currentWeaponNumber]);
-        _animator = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _currentWeapon.Fire(_shootPoint);
-        }
     }
 
     private void ChangeWeapon(Weapon weapon) => _currentWeapon = weapon;

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    protected readonly Quaternion Rotation90 = Quaternion.Euler(0, 0, 90);
+    
     [SerializeField] private string _label;
     [SerializeField] private int _price;
     [SerializeField] private Sprite _icon;

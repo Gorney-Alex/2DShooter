@@ -16,12 +16,6 @@ public class Spawner : MonoBehaviour
     public event UnityAction AllEnemiesSpawned;
     public event UnityAction<int, int> EnemyCountChanged;
 
-    public void Nextwave()
-    {
-        SetWave(++_currentWaveNumber);
-        _spawned = 0;
-    }
-    
     private void Start()
     {
         SetWave(_currentWaveNumber);
@@ -53,6 +47,12 @@ public class Spawner : MonoBehaviour
             
             _currentWave = null;
         }
+    }
+    
+    public void Nextwave()
+    {
+        SetWave(++_currentWaveNumber);
+        _spawned = 0;
     }
 
     private void OnEnemyDying(Enemy enemy)
